@@ -1,0 +1,19 @@
+target/
+*.class
+bin/
+
+# Eclipse IDE
+.settings/
+.classpath
+.project
+
+# IntelliJ IDE
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
