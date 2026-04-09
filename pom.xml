@@ -7,16 +7,34 @@
     <groupId>io.github.uzumaki232323</groupId>
     <artifactId>nepali-number-converter</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
 
-    <name>nepali-number-converter</name>
-    <description>A Java 17 library to convert digits to Nepali Unicode words and currency.</description>
-    
+    <name>Nepali Number Converter</name>
+    <description>A Hokage-level Java 17 library to convert digits to Nepali Unicode words and currency formats.</description>
+    <url>https://github.com/uzumaki232323/nepali-number-converter</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <developers>
         <developer>
             <id>uzumaki232323</id>
             <name>Gaurav Suwal</name>
+            <email>uzumaki232323@users.noreply.github.com</email>
+            <url>https://github.com/uzumaki232323</url>
         </developer>
     </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/uzumaki232323/nepali-number-converter.git</connection>
+        <developerConnection>scm:git:ssh://github.com/uzumaki232323/nepali-number-converter.git</developerConnection>
+        <url>https://github.com/uzumaki232323/nepali-number-converter</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -41,11 +59,86 @@
 
     <build>
         <plugins>
+            <!-- Compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+            <!-- Testing plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.3</version>
             </plugin>
+            <!-- Source code packaging for Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Javadoc generation for Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- GPG code signing for Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Sonatype Central deployment -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <!-- Distribution Management pointing to Sonatype -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
 </project>
